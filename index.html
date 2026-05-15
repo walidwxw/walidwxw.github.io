@@ -1,4 +1,1100 @@
----
-layout: home
-# Index page
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walid Aubouhan — Cybersecurity Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #191c23;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --muted: #7a7f8e;
+    --accent: #00e5a0;
+    --accent2: #005c41;
+    --accent-dim: rgba(0,229,160,0.08);
+    --red: #ff4d6d;
+    --amber: #ffb347;
+    --blue: #4d9fff;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+  a:hover { opacity: 0.75; }
+
+  /* GRID LINES BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,12,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .nav-links a:hover { color: var(--accent); opacity: 1; }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1.hero-name {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1.hero-name span {
+    display: block;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn:hover { background: var(--accent); color: var(--bg); opacity: 1; }
+
+  .btn-ghost {
+    border-color: var(--border2);
+    color: var(--muted);
+  }
+
+  .btn-ghost:hover { border-color: var(--text); color: var(--text); background: transparent; }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION HEADING */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.9;
+  }
+
+  .about-text p strong { color: var(--text); }
+
+  .about-details {}
+
+  .detail-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .detail-block-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .detail-block-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .skill-card:hover { border-color: var(--accent); }
+
+  .skill-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,160,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .skill-card-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.03em;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .tag.green { border-color: rgba(0,229,160,0.3); color: var(--accent); background: var(--accent-dim); }
+  .tag.red { border-color: rgba(255,77,109,0.25); color: var(--red); background: rgba(255,77,109,0.07); }
+  .tag.blue { border-color: rgba(77,159,255,0.25); color: var(--blue); background: rgba(77,159,255,0.07); }
+  .tag.amber { border-color: rgba(255,179,71,0.25); color: var(--amber); background: rgba(255,179,71,0.07); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .project-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-number {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+
+  .project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .project-link {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .project-link::after { content: '↗'; }
+
+  /* FEATURED PROJECT */
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem;
+  }
+
+  .project-card.featured .project-body { display: flex; flex-direction: column; }
+  .project-card.featured .project-terminal {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.9;
+    overflow: hidden;
+  }
+
+  .terminal-line { display: flex; gap: 0.5rem; }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-comment { color: rgba(122,127,142,0.6); }
+  .t-out { color: var(--muted); padding-left: 1.4rem; }
+  .t-success { color: var(--accent); padding-left: 1.4rem; }
+  .t-warn { color: var(--amber); padding-left: 1.4rem; }
+
+  /* EXPERIENCE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--border2);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 0.45rem;
+    width: 9px;
+    height: 9px;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+    border-radius: 50%;
+  }
+
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline-role {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .timeline-company {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .timeline-bullets li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+    line-height: 1.65;
+  }
+
+  .timeline-bullets li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* CERTIFICATIONS */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .cert-card:hover { border-color: var(--accent); }
+
+  .cert-badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .cert-badge.in-progress { background: rgba(255,179,71,0.1); border: 1px solid rgba(255,179,71,0.3); color: var(--amber); }
+  .cert-badge.completed { background: var(--accent-dim); border: 1px solid rgba(0,229,160,0.3); color: var(--accent); }
+  .cert-badge.passed { background: rgba(77,159,255,0.07); border: 1px solid rgba(77,159,255,0.3); color: var(--blue); }
+
+  .cert-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .cert-org {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-link-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+    color: var(--text);
+  }
+
+  .contact-link-item:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--text); opacity: 1; }
+
+  .contact-link-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-link-text {
+    font-size: 0.88rem;
+  }
+
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .contact-link-value { color: var(--text); font-weight: 600; font-size: 0.9rem; }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2.5rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* CURSOR BLINK */
+  .blink {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: text-bottom;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .about-grid,
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card.featured { grid-template-columns: 1fr; }
+    .project-card.featured .project-terminal { display: none; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">// walid.aubouhan</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Cybersecurity Engineer · INPT Rabat · 2025</div>
+  <h1 class="hero-name">
+    Walid<br>
+    <span>Aubouhan.</span>
+  </h1>
+  <p class="hero-desc">
+    Offensive security specialist & DevSecOps engineer building <strong>real-world security systems</strong> — from autonomous pentest agents to secure CI/CD pipelines. Currently targeting <strong>OSCP</strong>.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn">View Projects</a>
+    <a href="https://linkedin.com/in/walid-aubouhan-972727253/" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/walidwxw" class="btn btn-ghost" target="_blank">GitHub ↗</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">Security Projects</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">ISO</span>
+      <span class="stat-label">27001 Practitioner</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">OSCP</span>
+      <span class="stat-label">In Progress</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">5+</span>
+      <span class="stat-label">Tools Mastered</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm a <strong>cybersecurity engineering graduate from INPT Rabat (2025)</strong> with a strong focus on offensive security, threat intelligence, and security automation. I thrive at the intersection of red team thinking and DevSecOps engineering.
+      </p>
+      <p>
+        During my final-year internship at <strong>Netopia Solutions</strong>, I led an ISO 27001 SMSI deployment, conducted EBIOS RM risk analysis, and built governance frameworks — giving me a rare dual perspective across both attack and compliance.
+      </p>
+      <p>
+        I build autonomous security tools, secure cloud pipelines, and CTF writeups. I'm currently preparing for the <strong>OSCP certification</strong> and the <strong>DGSSI competitive entrance exam</strong> for Morocco's cybersecurity agency.
+      </p>
+    </div>
+    <div class="about-details reveal">
+      <div class="detail-block">
+        <div class="detail-block-label">Location</div>
+        <div class="detail-block-value">Rabat, Morocco</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-block-label">Education</div>
+        <div class="detail-block-value">Eng. Degree · INPT Rabat · 2025<br>Cybersecurity & Networks</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-block-label">Current Focus</div>
+        <div class="detail-block-value">OSCP · DGSSI Exam · DevSecOps Roles</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-block-label">Languages</div>
+        <div class="detail-block-value">French · Arabic · English</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Technical Arsenal</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-head">
+        <div class="skill-icon">⚔️</div>
+        <div class="skill-card-title">Offensive Security</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag red">Penetration Testing</span>
+        <span class="tag red">Web App Pentesting</span>
+        <span class="tag red">Network Recon</span>
+        <span class="tag red">MITRE ATT&CK</span>
+        <span class="tag red">Burp Suite</span>
+        <span class="tag red">Metasploit</span>
+        <span class="tag red">Nmap / Nessus</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-head">
+        <div class="skill-icon">🛡️</div>
+        <div class="skill-card-title">GRC & Governance</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag green">ISO 27001</span>
+        <span class="tag green">EBIOS RM</span>
+        <span class="tag green">Risk Analysis</span>
+        <span class="tag green">Security Audits</span>
+        <span class="tag green">IT Audit</span>
+        <span class="tag green">Compliance</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-head">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-card-title">DevSecOps & Cloud</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag blue">Docker / Kubernetes</span>
+        <span class="tag blue">GitLab CI/CD</span>
+        <span class="tag blue">AWS (EC2, S3, IAM)</span>
+        <span class="tag blue">SonarQube</span>
+        <span class="tag blue">Trivy</span>
+        <span class="tag blue">OWASP ZAP</span>
+        <span class="tag blue">Terraform</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-head">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-card-title">Automation & Intel</div>
+      </div>
+      <div class="skill-tags">
+        <span class="tag amber">Python</span>
+        <span class="tag amber">n8n Workflows</span>
+        <span class="tag amber">Ollama LLM</span>
+        <span class="tag amber">Subfinder / Amass</span>
+        <span class="tag amber">Nuclei</span>
+        <span class="tag amber">CTI / OSINT</span>
+        <span class="tag amber">Bash / Shell</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">03 — Projects</div>
+  <h2 class="section-title">What I've Built</h2>
+  <div class="projects-grid">
+
+    <!-- FEATURED PROJECT -->
+    <div class="project-card featured reveal">
+      <div class="project-body">
+        <div class="project-number">// FEATURED — 01</div>
+        <div class="project-title">Autonomous Pentest Recon Agent</div>
+        <div class="project-desc">
+          An AI-powered reconnaissance pipeline combining n8n workflow automation with Ollama LLM analysis. Deployed inside a hardened Docker container on Kali Linux, orchestrating subfinder, amass, httpx, nmap, and nuclei to produce intelligent threat reports autonomously — no human in the loop required.
+        </div>
+        <div class="project-stack" style="margin-bottom: 1rem;">
+          <span class="tag amber">n8n</span>
+          <span class="tag amber">Ollama</span>
+          <span class="tag blue">Docker</span>
+          <span class="tag red">Subfinder</span>
+          <span class="tag red">Nuclei</span>
+          <span class="tag amber">Kali Linux</span>
+        </div>
+        <a href="https://github.com/walidwxw" class="project-link" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project-terminal" aria-hidden="true">
+        <div class="terminal-line"><span class="t-prompt">$</span><span class="t-cmd">python agent.py --target example.com</span></div>
+        <div class="terminal-line"><span class="t-out">[*] Initializing recon pipeline...</span></div>
+        <div class="terminal-line"><span class="t-out">[*] Running subfinder...</span></div>
+        <div class="terminal-line"><span class="t-success">[+] Found 47 subdomains</span></div>
+        <div class="terminal-line"><span class="t-out">[*] httpx probing live hosts...</span></div>
+        <div class="terminal-line"><span class="t-success">[+] 23 hosts alive</span></div>
+        <div class="terminal-line"><span class="t-out">[*] Running nuclei templates...</span></div>
+        <div class="terminal-line"><span class="t-warn">[!] CVE-2023-44487 detected on port 443</span></div>
+        <div class="terminal-line"><span class="t-out">[*] Sending findings to Ollama LLM...</span></div>
+        <div class="terminal-line"><span class="t-success">[+] AI report generated → report.md</span></div>
+        <div class="terminal-line"><span class="t-comment"># Total scan time: 4m 32s</span></div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card reveal">
+      <div class="project-number">// 02</div>
+      <div class="project-title">DevSecOps CI/CD Pipeline</div>
+      <div class="project-desc">
+        End-to-end secure pipeline on GitLab CI integrating SAST with SonarQube, container scanning with Trivy, and dynamic application security testing with OWASP ZAP. Deploys to containerized environments with security gates that block vulnerable builds.
+      </div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="tag blue">GitLab CI</span>
+          <span class="tag green">SonarQube</span>
+          <span class="tag blue">Trivy</span>
+          <span class="tag red">OWASP ZAP</span>
+        </div>
+        <a href="https://github.com/walidwxw" class="project-link" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card reveal">
+      <div class="project-number">// 03</div>
+      <div class="project-title">AWS Secure CI/CD Infrastructure</div>
+      <div class="project-desc">
+        Hardened cloud pipeline on AWS using EC2, S3, and IAM with least-privilege policies. Implemented security groups, VPC segmentation, CloudTrail logging, and automated compliance checks for secure application deployment.
+      </div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="tag amber">AWS EC2</span>
+          <span class="tag amber">IAM</span>
+          <span class="tag blue">Terraform</span>
+          <span class="tag green">CloudTrail</span>
+        </div>
+        <a href="https://github.com/walidwxw" class="project-link" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project-card reveal">
+      <div class="project-number">// 04</div>
+      <div class="project-title">SOC Home Lab</div>
+      <div class="project-desc">
+        Built a full Security Operations Center lab environment with Splunk SIEM for log aggregation and threat detection. Simulated real attack scenarios, crafted detection rules, and documented incident response playbooks.
+      </div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="tag red">Splunk</span>
+          <span class="tag amber">Kali Linux</span>
+          <span class="tag blue">Wireshark</span>
+          <span class="tag red">SIEM</span>
+        </div>
+        <a href="https://github.com/walidwxw/walidwxw/blob/main/Rapport%20SOC.pdf" class="project-link" target="_blank">Report</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 5 -->
+    <div class="project-card reveal">
+      <div class="project-number">// 05</div>
+      <div class="project-title">Active Directory Attack & Defense Lab</div>
+      <div class="project-desc">
+        Simulated enterprise environment with Active Directory, reproducing common attacks including Kerberoasting, Pass-the-Hash, and LDAP enumeration. Documented hardening measures and detection strategies for each vector.
+      </div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="tag blue">Windows Server</span>
+          <span class="tag red">BloodHound</span>
+          <span class="tag amber">CrackMapExec</span>
+          <span class="tag red">Impacket</span>
+        </div>
+        <a href="https://github.com/walidwxw" class="project-link" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 6 -->
+    <div class="project-card reveal">
+      <div class="project-number">// 06</div>
+      <div class="project-title">ISO 27001 SMSI Deployment — PFE</div>
+      <div class="project-desc">
+        Final-year project at Netopia Solutions. Led full SMSI (ISMS) implementation per ISO 27001, performed EBIOS RM risk analysis, mapped threat scenarios, and produced security policy documentation and audit-ready evidence packages.
+      </div>
+      <div class="project-footer">
+        <div class="project-stack">
+          <span class="tag green">ISO 27001</span>
+          <span class="tag green">EBIOS RM</span>
+          <span class="tag green">Risk Analysis</span>
+          <span class="tag blue">GRC</span>
+        </div>
+        <a href="https://linkedin.com/in/walid-aubouhan-972727253/" class="project-link" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">04 — Experience</div>
+  <h2 class="section-title">Work & Education</h2>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-header">
+        <div class="timeline-role">Cybersecurity Intern (PFE)</div>
+        <div class="timeline-date">Feb 2025 – Jul 2025</div>
+      </div>
+      <div class="timeline-company">Netopia Solutions · Rabat, Morocco</div>
+      <ul class="timeline-bullets">
+        <li>Deployed an ISO 27001-compliant SMSI (ISMS) framework from scratch</li>
+        <li>Conducted EBIOS RM risk analysis: identified threat scenarios, assessed likelihood and impact</li>
+        <li>Produced security governance documentation and audit evidence packages</li>
+        <li>Mapped organizational assets to security controls and implemented remediation roadmaps</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-header">
+        <div class="timeline-role">Engineering Degree — Cybersecurity & Networks</div>
+        <div class="timeline-date">2022 – 2025</div>
+      </div>
+      <div class="timeline-company">INPT (Institut National des Postes et Télécommunications) · Rabat</div>
+      <ul class="timeline-bullets">
+        <li>Specialized in network security, cryptography, and systems penetration testing</li>
+        <li>Completed coursework in digital forensics, secure software development, and cyber threat intelligence</li>
+        <li>Built multiple lab projects across offensive and defensive security domains</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div style="margin-top: 3rem;">
+    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem;">Certifications & Exams</h3>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <span class="cert-badge in-progress">In Progress</span>
+        <div class="cert-name">OSCP</div>
+        <div class="cert-org">Offensive Security</div>
+      </div>
+      <div class="cert-card reveal">
+        <span class="cert-badge in-progress">Preparing</span>
+        <div class="cert-name">DGSSI Competitive Exam</div>
+        <div class="cert-org">Direction Générale de la Sécurité des Systèmes d'Information</div>
+      </div>
+      <div class="cert-card reveal">
+        <span class="cert-badge completed">Completed</span>
+        <div class="cert-name">ISO 27001 Practitioner</div>
+        <div class="cert-org">SMSI Implementation — PFE</div>
+      </div>
+      <div class="cert-card reveal">
+        <span class="cert-badge passed">Pursuing</span>
+        <div class="cert-name">Junior IT Auditor Track</div>
+        <div class="cert-org">KPMG Morocco Application</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">05 — Contact</div>
+  <h2 class="section-title">Get In Touch<span class="blink"></span></h2>
+  <div class="contact-grid">
+    <div class="contact-text reveal">
+      <p>
+        I'm actively looking for opportunities in <strong style="color: var(--text);">offensive security, DevSecOps, and IT audit</strong> — in Morocco or internationally.
+      </p>
+      <p>
+        Whether you have a role to discuss, a CTF team to form, or just want to talk about penetration testing or security automation — I'm all ears.
+      </p>
+      <a href="https://linkedin.com/in/walid-aubouhan-972727253/" class="btn" target="_blank" style="display: inline-block; margin-top: 0.5rem;">Let's Connect ↗</a>
+    </div>
+    <div class="contact-links reveal">
+      <a href="https://linkedin.com/in/walid-aubouhan-972727253/" class="contact-link-item" target="_blank">
+        <div class="contact-link-icon">💼</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">walid-aubouhan-972727253</span>
+        </div>
+      </a>
+      <a href="https://github.com/walidwxw" class="contact-link-item" target="_blank">
+        <div class="contact-link-icon">🐙</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/walidwxw</span>
+        </div>
+      </a>
+      <a href="https://walidwxw.github.io" class="contact-link-item" target="_blank">
+        <div class="contact-link-icon">🌐</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Portfolio / Blog</span>
+          <span class="contact-link-value">walidwxw.github.io</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <span>Walid Aubouhan</span> · 2025 · Rabat, Morocco</p>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
